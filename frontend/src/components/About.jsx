@@ -36,15 +36,15 @@ const About = () => {
     });
 
     tl.fromTo('.about-text',
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out' }
+      { y: 60, opacity: 0, filter: 'blur(15px)', x: -30 },
+      { y: 0, opacity: 1, filter: 'blur(0px)', x: 0, duration: 1.2, stagger: 0.25, ease: 'power4.out' }
     );
 
     if (!loading && skills.length > 0) {
       tl.fromTo('.skill-badge',
-        { scale: 0.5, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'back.out(1.7)' },
-        '-=0.4'
+        { scale: 0.2, opacity: 0, y: 30, rotationZ: -15 },
+        { scale: 1, opacity: 1, y: 0, rotationZ: 0, duration: 0.6, stagger: 0.04, ease: 'back.out(1.5)' },
+        '-=0.8'
       );
     }
   }, { scope: container, dependencies: [loading, skills] });
@@ -64,7 +64,7 @@ const About = () => {
           <h2 className="heading-display text-gradient about-text" style={{ fontSize: '3rem', marginBottom: '30px' }}>About Me</h2>
           <div className="about-text" style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '2px' }}></div>
           <p className="about-text" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8, marginBottom: '20px' }}>
-            I’m a passionate software engineer based in Southern Leyte, with a strong focus on crafting deeply interactive, premium web experiences—primarily on the frontend. I specialize in building visually refined interfaces, from pixel-perfect glassmorphism designs using React and Tailwind to smooth, engaging animations that elevate user experience.
+            I’m a passionate software engineer based in Cebu City, with a strong focus on crafting deeply interactive, premium web experiences—primarily on the frontend. I specialize in building visually refined interfaces, from pixel-perfect glassmorphism designs using React and Tailwind to smooth, engaging animations that elevate user experience.
           </p>
           <p className="about-text" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
             While I have experience working across the full stack with technologies like Node.js and Firebase, my core drive lies in creating frontend experiences that are both aesthetically compelling and highly functional. Whether developing AI-powered applications like SpeakForge or designing seamless UI interactions, I aim to build technology that feels as good as it looks.

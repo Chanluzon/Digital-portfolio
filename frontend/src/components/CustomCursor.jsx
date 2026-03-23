@@ -16,7 +16,7 @@ const CustomCursor = () => {
 
     const xToCursor = gsap.quickTo(cursorRef.current, 'x', { duration: 0, ease: 'none' });
     const yToCursor = gsap.quickTo(cursorRef.current, 'y', { duration: 0, ease: 'none' });
-    
+
     const xToFollower = gsap.quickTo(followerRef.current, 'x', { duration: 0.6, ease: 'power3.out' });
     const yToFollower = gsap.quickTo(followerRef.current, 'y', { duration: 0.6, ease: 'power3.out' });
 
@@ -66,18 +66,18 @@ const CustomCursor = () => {
 
   useEffect(() => {
     if (isHovering) {
-      gsap.to(followerRef.current, { 
-        scale: 1.8, 
-        background: 'rgba(168, 85, 247, 0.15)', 
+      gsap.to(followerRef.current, {
+        scale: 1.8,
+        background: 'rgba(168, 85, 247, 0.15)',
         borderColor: 'rgba(168, 85, 247, 0)',
         duration: 0.3,
         ease: 'power2.out'
       });
       gsap.to(cursorRef.current, { scale: 0, duration: 0.2 });
     } else {
-      gsap.to(followerRef.current, { 
-        scale: 1, 
-        background: 'transparent', 
+      gsap.to(followerRef.current, {
+        scale: 1,
+        background: 'transparent',
         borderColor: 'var(--accent-light)',
         duration: 0.3,
         ease: 'power2.out'
@@ -93,8 +93,8 @@ const CustomCursor = () => {
 
   return (
     <>
-      <div 
-        ref={cursorRef} 
+      <div
+        ref={cursorRef}
         style={{
           position: 'fixed',
           top: 0, left: 0,
@@ -106,8 +106,8 @@ const CustomCursor = () => {
           mixBlendMode: 'difference'
         }}
       />
-      <div 
-        ref={followerRef} 
+      <div
+        ref={followerRef}
         style={{
           position: 'fixed',
           top: 0, left: 0,

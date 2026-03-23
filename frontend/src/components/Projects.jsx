@@ -30,7 +30,7 @@ const Projects = () => {
     });
     if (!loading && projects.length > 0) {
       gsap.fromTo('.project-card',
-        { y: 80, opacity: 0 },
+        { y: 150, opacity: 0, rotationX: 15, scale: 0.9, filter: 'blur(15px)' },
         {
           scrollTrigger: {
             trigger: container.current,
@@ -38,16 +38,47 @@ const Projects = () => {
           },
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out'
+          rotationX: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 1.2,
+          stagger: 0.2,
+          ease: 'expo.out(1, 0.7)'
         }
       );
     }
   }, { scope: container, dependencies: [loading, projects] });
 
+  const handleCardMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+
+    gsap.to(card, {
+      rotationX: rotateX,
+      rotationY: rotateY,
+      transformPerspective: 1000,
+      ease: 'power2.out',
+      duration: 0.4
+    });
+  };
+
+  const handleCardLeave = (e) => {
+    gsap.to(e.currentTarget, {
+      rotationX: 0,
+      rotationY: 0,
+      ease: 'elastic.out(1, 0.3)',
+      duration: 1.2
+    });
+  };
+
   return (
-    <section id="projects" ref={container} style={{ padding: '100px 0', minHeight: '80vh', position: 'relative', zIndex: 10 }}>
+    <section id="projects" ref={container} style={{ padding: '100px 0', minHeight: '80vh', position: 'relative', zIndex: 10, perspective: '1000px' }}>
       {/* Background glow for the section */}
       <div className="projects-bg" style={{
         position: 'absolute', top: '30%', right: '-10%', width: '600px', height: '600px',
@@ -73,11 +104,15 @@ const Projects = () => {
           width: '100%'
         }}>
           {projects.map((project) => (
-            <div key={project.id} className="glass-panel project-card" style={{
+            <div key={project.id} className="glass-panel project-card" 
+                 onMouseMove={handleCardMove} 
+                 onMouseLeave={handleCardLeave}
+                 style={{
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              border: '1px solid rgba(255,255,255,0.08)'
+              border: '1px solid rgba(255,255,255,0.08)',
+              transformStyle: 'preserve-3d'
             }}>
               <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
                 <img

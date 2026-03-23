@@ -62,20 +62,20 @@ function App() {
     <>
       <Navbar />
       <div className="animate-fade-in">
-        <main className="glass-panel" style={{ 
-        width: '100%', 
-        minHeight: '100vh',
-        padding: '0 5%',
-        borderRadius: 0, 
-        border: 'none',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)'
-      }}>
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </main>
+        <main className="glass-panel" style={{
+          width: '100%',
+          minHeight: '100vh',
+          padding: '0 5%',
+          borderRadius: 0,
+          border: 'none',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)'
+        }}>
+          <Hero />
+          <About />
+          <Projects />
+          <Contact />
+        </main>
 
         <Footer />
       </div>
