@@ -59,10 +59,20 @@ const Contact = () => {
 
     setStatus('sending');
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: '63498d71-0b38-44f6-99d3-02ddf86b24ea',
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Portfolio Contact from ${formData.name}`,
+          from_name: 'Digital Portfolio'
+        })
       });
       if (res.ok) {
         setStatus('success');
