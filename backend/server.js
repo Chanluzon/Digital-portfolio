@@ -15,9 +15,9 @@ app.use(express.json());
 // Routes
 app.use('/api', apiRoutes);
 
-// Base route for a health check
-app.get('/', (req, res) => {
-    res.json({ message: 'Digital Portfolio Server is running' });
+// Base route for a// Test API route
+app.get('/api', (req, res) => {
+    res.json({ message: 'Digital Portfolio API is running' });
 });
 
 // Serve frontend static files
