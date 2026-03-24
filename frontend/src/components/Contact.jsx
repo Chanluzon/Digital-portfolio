@@ -127,10 +127,10 @@ const Contact = () => {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>✉</span> christamron.luzon@gmail.com
+              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>✉</span>  christamron.luzon@gmail.com
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>📍</span> San Jose, San Juan, Southern Leyte
+              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>📍</span>Cebu City, Cebu 6000, Philippines.
             </div>
           </div>
         </div>
@@ -206,8 +206,8 @@ const Contact = () => {
             maxWidth: '500px',
             width: '90%'
           }}>
-             <h3 className="heading-display" style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '15px' }}>Inquiry Received</h3>
-             <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.6 }}>Thank you for reaching out. Your message has been successfully delivered, and I will be in touch with you shortly.</p>
+            <h3 className="heading-display" style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '15px' }}>Inquiry Received</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.6 }}>Thank you for reaching out. Your message has been successfully delivered, and I will be in touch with you shortly.</p>
           </div>
         </div>
       )}

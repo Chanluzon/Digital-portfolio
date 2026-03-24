@@ -102,8 +102,7 @@ const CustomCursor = () => {
           background: '#fff',
           borderRadius: '50%',
           pointerEvents: 'none',
-          zIndex: 9999,
-          mixBlendMode: 'difference'
+          zIndex: 9999
         }}
       />
       <div

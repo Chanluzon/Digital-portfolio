@@ -32,9 +32,9 @@ const Hero = () => {
       "-=1.1" // Deep overlap
     );
 
-    // Idle float animations
-    gsap.to('.hero-orb-1', { y: "-=50", x: "+=30", duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-    gsap.to('.hero-orb-2', { y: "+=60", x: "-=40", duration: 5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    // Idle float animations (removed y so it doesn't fight ScrollTrigger!)
+    gsap.to('.hero-orb-1', { x: "+=30", duration: 4, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.to('.hero-orb-2', { x: "-=40", duration: 5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
 
     // Parallax background orbs on scroll
     gsap.to('.hero-orb-1', {
@@ -81,14 +81,14 @@ const Hero = () => {
       position: 'relative',
       overflow: 'hidden' // Keeps parallax inside
     }}>
-      {/* Decorative Blur Orbs with class for parallax */}
+      {/* Decorative Blur Orbs with class for parallax (optimized for scroll performance) */}
       <div className="hero-orb-1" style={{
-        position: 'absolute', top: '5%', left: '0%', width: '400px', height: '400px',
-        background: 'var(--accent)', filter: 'blur(150px)', opacity: 0.5, borderRadius: '50%', zIndex: -1
+        position: 'absolute', top: '-10%', left: '-10%', width: '700px', height: '700px',
+        background: 'radial-gradient(circle at center, var(--accent) 0%, transparent 65%)', opacity: 0.4, zIndex: -1, pointerEvents: 'none', willChange: 'transform'
       }}></div>
       <div className="hero-orb-2" style={{
-        position: 'absolute', bottom: '5%', right: '0%', width: '500px', height: '500px',
-        background: 'var(--accent-light)', filter: 'blur(180px)', opacity: 0.3, borderRadius: '50%', zIndex: -1
+        position: 'absolute', bottom: '-10%', right: '-10%', width: '900px', height: '900px',
+        background: 'radial-gradient(circle at center, var(--accent-light) 0%, transparent 65%)', opacity: 0.25, zIndex: -1, pointerEvents: 'none', willChange: 'transform'
       }}></div>
 
       <div style={{
@@ -158,10 +158,10 @@ const Hero = () => {
 
         {/* Right Side: Image Content */}
         <div className="hero-element" style={{ flex: '0 0 45%', display: 'flex', justifyContent: 'flex-end', position: 'relative', alignSelf: 'flex-end', minWidth: 0, zIndex: 5 }}>
-          {/* Subtle glow directly behind the image */}
+          {/* Subtle glow directly behind the image (optimized) */}
           <div style={{
-            position: 'absolute', top: '0', right: '0', width: '100%', height: '100%',
-            background: 'var(--accent)', filter: 'blur(150px)', opacity: 0.3, borderRadius: '50%', zIndex: -1
+            position: 'absolute', top: '0', right: '-10%', width: '120%', height: '120%',
+            background: 'radial-gradient(circle at center, var(--accent) 0%, transparent 70%)', opacity: 0.25, zIndex: -1, pointerEvents: 'none', willChange: 'transform'
           }}></div>
 
           <div style={{ position: 'absolute', bottom: 'clamp(-30px, -4vw, -60px)', right: '-15%', pointerEvents: 'none', display: 'flex', justifyContent: 'flex-end', zIndex: 0 }}>

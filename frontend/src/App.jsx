@@ -12,7 +12,7 @@ import Contact from './components/Contact';
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.8, // Decreased duration makes it feel punchier and less 'laggy'
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
@@ -68,8 +68,8 @@ function App() {
           padding: '0 5%',
           borderRadius: 0,
           border: 'none',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)'
+          background: 'transparent',
+          boxShadow: 'none'
         }}>
           <Hero />
           <About />
