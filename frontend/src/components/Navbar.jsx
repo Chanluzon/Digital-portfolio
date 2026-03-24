@@ -25,24 +25,20 @@ const Navbar = () => {
 
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', width: '100%', position: 'fixed', top: scrolled ? '20px' : '30px', left: 0, zIndex: 100, transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', width: '100%', position: 'fixed', top: scrolled ? '20px' : '40px', left: 0, zIndex: 100, transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}>
       <header
         className="glass-panel"
         style={{
-          width: scrolled ? 'clamp(90%, 95vw, 1200px)' : 'clamp(95%, 98vw, 1200px)',
-          maxWidth: '1200px',
-          padding: 'clamp(8px, 1.5vw, 12px) clamp(10px, 3vw, 30px)',
+          width: 'clamp(90%, 95vw, 1100px)',
+          padding: scrolled ? '10px 25px' : '15px 40px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'nowrap',
-          overflowX: 'auto',
-          scrollbarWidth: 'none', // Hides scrollbar on Firefox for ultra-narrow screens
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           borderRadius: '100px',
           background: scrolled ? 'var(--glass-bg)' : 'transparent',
           border: scrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.2)' : 'none',
+          boxShadow: scrolled ? '0 10px 40px rgba(0,0,0,0.1)' : 'none',
           backdropFilter: scrolled ? 'blur(24px)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none'
         }}
@@ -50,22 +46,22 @@ const Navbar = () => {
         <div
           className="heading-display text-gradient"
           style={{ 
-            fontSize: 'clamp(0.8rem, 1.5vw, 1.4rem)', 
+            fontSize: 'clamp(1rem, 1.4vw, 1.5rem)', 
             cursor: 'pointer', 
             letterSpacing: '-0.5px',
             whiteSpace: 'nowrap',
-            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            transition: 'all 0.3s ease',
             display: 'inline-block'
           }}
           onClick={() => window.scrollTo(0, 0)}
-          onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.letterSpacing = '0px'; }}
-          onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.letterSpacing = '-0.5px'; }}
+          onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
+          onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
         >
           Christ Amron A. Luzon
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 1.5vw, 1.5rem)', flexWrap: 'nowrap' }}>
-          <nav style={{ display: 'flex', gap: 'clamp(0rem, 0.3vw, 0.2rem)', alignItems: 'center', flexWrap: 'nowrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 2vw, 25px)' }}>
+          <nav style={{ display: 'flex', gap: '5px', alignItems: 'center', display: 'flex' }}>
             {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
               <a
                 key={item}
@@ -73,15 +69,15 @@ const Navbar = () => {
                 style={{
                   color: 'var(--text-primary)',
                   textDecoration: 'none',
-                  fontSize: 'clamp(0.65rem, 1.1vw, 0.95rem)',
+                  fontSize: 'clamp(0.75rem, 1vw, 0.95rem)',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
-                  padding: 'clamp(5px, 1vw, 10px) clamp(6px, 1.2vw, 18px)',
+                  padding: '8px 18px',
                   borderRadius: '100px',
-                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                  transition: 'all 0.3s ease',
                 }}
-                onMouseOver={(e) => { e.target.style.background = 'var(--glass-hover)'; e.target.style.transform = 'scale(1.05)'; e.target.style.color = 'var(--accent-light)'; }}
-                onMouseOut={(e) => { e.target.style.background = 'transparent'; e.target.style.transform = 'scale(1)'; e.target.style.color = 'var(--text-primary)'; }}
+                onMouseOver={(e) => { e.target.style.background = 'var(--glass-hover)'; e.target.style.color = 'var(--text-primary)'; }}
+                onMouseOut={(e) => { e.target.style.background = 'transparent'; }}
               >
                 {item}
               </a>
@@ -94,16 +90,25 @@ const Navbar = () => {
           <button
             onClick={toggleTheme}
             style={{
-              background: 'linear-gradient(135deg, var(--accent), var(--accent-light))', border: 'none', color: '#fff',
-              padding: 'clamp(6px, 1vw, 10px) clamp(10px, 1.5vw, 20px)', borderRadius: '100px', cursor: 'pointer', fontFamily: 'var(--font-sans)', fontWeight: 600,
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)', display: 'flex', alignItems: 'center', gap: 'clamp(4px, 1vw, 8px)', fontSize: 'clamp(0.65rem, 1vw, 0.85rem)',
-              whiteSpace: 'nowrap', flexShrink: 0,
-              boxShadow: '0 4px 15px rgba(107, 33, 168, 0.3)'
+              background: 'var(--glass-bg)',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-primary)',
+              width: '42px',
+              height: '42px',
+              borderRadius: '50%',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              fontSize: '1.2rem',
+              flexShrink: 0
             }}
-            onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.05) translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(168, 85, 247, 0.5)'; }}
-            onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1) translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(107, 33, 168, 0.3)'; }}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'rotate(15deg) scale(1.1)'; e.currentTarget.style.background = 'var(--accent-light)'; e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(168, 85, 247, 0.4)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'rotate(0deg) scale(1)'; e.currentTarget.style.background = 'var(--glass-bg)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; e.currentTarget.style.boxShadow = 'none'; }}
+            title="Toggle Theme"
           >
-            {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+            {theme === 'dark' ? '☀️' : '🌙'}
           </button>
         </div>
       </header>

@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
 
 :root {
   --bg-color: #050505;
-  --text-primary: #ededed;
-  --text-secondary: #a0a0a0;
-  --accent: #6b21a8;
-  --accent-light: #a855f7;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0b0;
+  --accent: #7c3aed;
+  --accent-light: #c084fc;
   
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.05);
   --glass-hover: rgba(255, 255, 255, 0.08);
   
-  --font-sans: 'Inter', sans-serif;
-  --font-display: 'Outfit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
 }
 
 [data-theme='light'] {
@@ -102,15 +102,23 @@ body {
 
 /* Typography Classes */
 .text-gradient {
-  background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+  background: linear-gradient(90deg, #ffffff, var(--accent-light), var(--accent), #ffffff);
+  background-size: 300% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: shimmer 8s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 300% center;
+  }
 }
 
 .heading-display {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }

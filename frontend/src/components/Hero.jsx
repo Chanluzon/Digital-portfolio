@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const container = useRef();
-  const headline = "Hi, I'm Christ Amron.";
+  const headline = "Hi, I'm Christ\u00A0Amron\u00A0A.\u00A0Luzon.";
   const words = headline.split(" ");
 
   useGSAP(() => {
@@ -76,7 +76,7 @@ const Hero = () => {
 
   return (
     <section id="home" ref={container} style={{
-      minHeight: '100vh',
+      minHeight: '95vh',
       display: 'flex',
       position: 'relative',
       overflow: 'hidden' // Keeps parallax inside
@@ -92,18 +92,32 @@ const Hero = () => {
       }}></div>
 
       <div style={{
-        width: '100%', flex: 1, padding: 'clamp(60px, 10vw, 120px) 0 clamp(20px, 5vw, 60px)', position: 'relative', zIndex: 1,
-        display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: 'clamp(10px, 3vw, 60px)'
+        width: '100%', flex: 1, padding: 'clamp(40px, 8vw, 90px) clamp(20px, 5vw, 80px) clamp(20px, 4vw, 40px)', position: 'relative', zIndex: 1,
+        display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: 'clamp(10px, 3vw, 60px)',
+        boxSizing: 'border-box'
       }}>
-        
+
         {/* Left Side: Text Content */}
-        <div style={{ flex: '1 1 55%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', minWidth: 0 }}>
-          <h2 className="hero-element" style={{ color: 'var(--accent-light)', fontSize: 'clamp(0.8rem, 1.5vw, 1.2rem)', marginBottom: 'clamp(10px, 2vw, 20px)', letterSpacing: 'clamp(2px, 0.5vw, 4px)', textTransform: 'uppercase', fontWeight: 600 }}>
+        <div style={{ flex: '1 1 55%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', minWidth: 0, marginTop: '2vh' }}>
+          <h2 className="hero-element" style={{ color: 'var(--accent-light)', fontSize: 'clamp(1rem, 2vw, 1.8rem)', marginBottom: 'clamp(10px, 2vw, 20px)', letterSpacing: 'clamp(2px, 0.5vw, 4px)', textTransform: 'uppercase', fontWeight: 700 }}>
             Welcome
           </h2>
-          
+
           {/* Animated Word Staggering Headline */}
-          <h1 className="heading-display text-gradient" style={{ fontSize: 'clamp(2.5rem, 6vw, 7.5rem)', marginBottom: 'clamp(15px, 3vw, 35px)', margin: '0', lineHeight: 1.1 }}>
+          <h1 
+            className="heading-display text-gradient" 
+            style={{ 
+              fontSize: 'clamp(2rem, 5vw, 5.5rem)', 
+              marginBottom: 'clamp(10px, 2vw, 25px)', 
+              margin: '0', 
+              lineHeight: 1.1,
+              position: 'relative',
+              zIndex: 1,
+              transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.zIndex = 50; e.currentTarget.style.transform = 'scale(1.03) translateX(15px)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.zIndex = 1; e.currentTarget.style.transform = 'scale(1) translateX(0)'; }}
+          >
             {words.map((word, i) => (
               <span key={i} className="hero-word-wrapper" style={{ display: 'inline-block', overflow: 'hidden', paddingInlineEnd: 'clamp(5px, 1vw, 20px)' }}>
                 <span className="hero-word text-gradient" style={{ display: 'inline-block', paddingBottom: '10px' }}>{word}</span>
@@ -111,30 +125,30 @@ const Hero = () => {
             ))}
           </h1>
 
-          <p className="hero-element" style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.25rem)', color: 'var(--text-secondary)', marginBottom: '50px', lineHeight: 1.7, maxWidth: '650px', margin: 'clamp(15px, 3vw, 30px) 0 clamp(20px, 4vw, 50px)' }}>
+          <p className="hero-element" style={{ fontSize: 'clamp(0.8rem, 1.1vw, 1.1rem)', color: 'var(--text-secondary)', marginBottom: '30px', lineHeight: 1.7, maxWidth: '650px', margin: 'clamp(10px, 2vw, 20px) 0 clamp(15px, 3vw, 35px)' }}>
             I’m a passionate frontend-focused developer crafting elegant, high-performance web applications with immersive, visually refined interfaces and smooth, engaging interactions. Let’s create something extraordinary.
           </p>
-          
+
           <div className="hero-element" style={{ display: 'flex', gap: 'clamp(10px, 2vw, 25px)', justifyContent: 'flex-start', flexWrap: 'wrap' }}>
             <a href="#projects" style={{ textDecoration: 'none' }}>
-              <button className="btn-primary" 
-                onMouseMove={enableMagnetic} 
+              <button className="btn-primary"
+                onMouseMove={enableMagnetic}
                 onMouseLeave={resetMagnetic}
-                style={{ padding: 'clamp(10px, 1.5vw, 16px) clamp(20px, 3vw, 45px)', fontSize: 'clamp(0.85rem, 1.2vw, 1.15rem)' }}>
+                style={{ padding: 'clamp(8px, 1.2vw, 14px) clamp(16px, 2vw, 32px)', fontSize: 'clamp(0.8rem, 1vw, 1rem)' }}>
                 View My Work
               </button>
             </a>
             <a href="#contact" style={{ textDecoration: 'none' }}>
-              <button 
-                onMouseMove={enableMagnetic} 
+              <button
+                onMouseMove={enableMagnetic}
                 onMouseLeave={resetMagnetic}
-                style={{ 
-                padding: 'clamp(10px, 1.5vw, 15px) clamp(20px, 3vw, 45px)', fontSize: 'clamp(0.85rem, 1.2vw, 1.15rem)', background: 'rgba(255, 255, 255, 0.03)', cursor: 'pointer', color: 'var(--text-primary)', 
-                fontWeight: 600, fontFamily: 'var(--font-sans)', border: '1px solid var(--glass-border)',
-                borderRadius: '8px', transition: 'background-color 0.3s ease, border-color 0.3s ease'
+                style={{
+                  padding: 'clamp(8px, 1.2vw, 14px) clamp(16px, 2vw, 32px)', fontSize: 'clamp(0.8rem, 1vw, 1rem)', background: 'rgba(255, 255, 255, 0.03)', cursor: 'pointer', color: 'var(--text-primary)',
+                  fontWeight: 600, fontFamily: 'var(--font-sans)', border: '1px solid var(--glass-border)',
+                  borderRadius: '8px', transition: 'background-color 0.3s ease, border-color 0.3s ease'
                 }}
-              onMouseOver={(e) => Object.assign(e.target.style, { background: 'var(--glass-hover)', borderColor: 'rgba(255,255,255,0.3)' })}
-              onMouseOut={(e) => Object.assign(e.target.style, { background: 'rgba(255,255,255,0.03)', borderColor: 'var(--glass-border)' })}
+                onMouseOver={(e) => Object.assign(e.target.style, { background: 'var(--glass-hover)', borderColor: 'rgba(255,255,255,0.3)' })}
+                onMouseOut={(e) => Object.assign(e.target.style, { background: 'rgba(255,255,255,0.03)', borderColor: 'var(--glass-border)' })}
               >
                 Let's Talk
               </button>
@@ -143,31 +157,31 @@ const Hero = () => {
         </div>
 
         {/* Right Side: Image Content */}
-        <div className="hero-element" style={{ flex: '0 0 45%', display: 'flex', justifyContent: 'flex-end', position: 'relative', alignSelf: 'flex-end', minWidth: 0 }}>
+        <div className="hero-element" style={{ flex: '0 0 45%', display: 'flex', justifyContent: 'flex-end', position: 'relative', alignSelf: 'flex-end', minWidth: 0, zIndex: 5 }}>
           {/* Subtle glow directly behind the image */}
           <div style={{
-            position: 'absolute', top: '20%', right: '0', width: '100%', height: '100%',
+            position: 'absolute', top: '0', right: '0', width: '100%', height: '100%',
             background: 'var(--accent)', filter: 'blur(150px)', opacity: 0.3, borderRadius: '50%', zIndex: -1
           }}></div>
 
-          <img
-            src={profileImg}
-            alt="Christ Amron"
-            style={{
-              width: '160%',
-              maxWidth: 'none',
-              marginRight: '-15%',
-              marginBottom: 'clamp(-30px, -4vw, -60px)', // Counters the padding to dock precisely to bottom edge
-              objectFit: 'contain',
-              objectPosition: 'bottom right',
-              filter: 'drop-shadow(-20px 20px 50px rgba(168, 85, 247, 0.3))',
-              transform: 'perspective(1200px) rotateY(-8deg)',
-              transformOrigin: 'bottom right',
-              transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-            onMouseOver={(e) => e.target.style.transform = 'perspective(1200px) rotateY(0deg) scale(1.05)'}
-            onMouseOut={(e) => e.target.style.transform = 'perspective(1200px) rotateY(-8deg) scale(1)'}
-          />
+          <div style={{ position: 'absolute', bottom: 'clamp(-30px, -4vw, -60px)', right: '-15%', pointerEvents: 'none', display: 'flex', justifyContent: 'flex-end', zIndex: 0 }}>
+            <img
+              src={profileImg}
+              alt="Christ Amron"
+              style={{
+                height: '110vh',
+                maxWidth: 'none',
+                objectFit: 'contain',
+                filter: 'drop-shadow(-20px 20px 50px rgba(168, 85, 247, 0.3))',
+                transform: 'perspective(1200px) rotateY(-8deg)',
+                transformOrigin: 'bottom right',
+                transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                pointerEvents: 'auto'
+              }}
+              onMouseOver={(e) => e.target.style.transform = 'perspective(1200px) rotateY(0deg) scale(1.05)'}
+              onMouseOut={(e) => e.target.style.transform = 'perspective(1200px) rotateY(-8deg) scale(1)'}
+            />
+          </div>
         </div>
 
       </div>
