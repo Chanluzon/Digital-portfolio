@@ -267,14 +267,49 @@ section {
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 60px;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1024px) {
   .grid-2 {
-    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  
+  .section-title {
+    margin-bottom: 40px;
+  }
+
+  section {
+    padding: 60px 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .grid-2 {
+    gap: 40px;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 12px 24px;
+  }
+}
+
 
 /* Animations */
 .reveal-text {

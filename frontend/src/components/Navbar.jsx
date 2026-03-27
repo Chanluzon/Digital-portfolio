@@ -4,6 +4,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState('dark');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -12,9 +13,8 @@ const Navbar = () => {
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalScroll) * 100;
+      const progress = (window.scrollY / (totalScroll || 1)) * 100;
       setScrollProgress(progress);
     };
 
@@ -29,6 +29,8 @@ const Navbar = () => {
     localStorage.setItem('theme', newTheme);
   };
 
+  const navItems = ['Home', 'About', 'Projects', 'Contact'];
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -38,7 +40,7 @@ const Navbar = () => {
       top: 0, 
       left: 0, 
       zIndex: 1000, 
-      padding: scrolled ? '15px 0' : '30px 0',
+      padding: scrolled ? '12px 0' : '25px 0',
       transition: 'var(--transition-smooth)'
     }}>
       {/* Scroll Progress Bar */}
@@ -56,34 +58,37 @@ const Navbar = () => {
       <header
         className="glass-panel"
         style={{
-          width: 'clamp(90%, 95vw, 1200px)',
-          padding: scrolled ? '10px 20px' : '15px 35px',
+          width: 'clamp(92%, 95vw, 1300px)',
+          padding: scrolled ? '8px 16px' : '12px 28px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           borderRadius: '100px',
-          background: scrolled ? 'rgba(8, 8, 12, 0.7)' : 'transparent',
+          background: scrolled ? 'var(--glass-bg)' : 'transparent',
           borderColor: scrolled ? 'var(--glass-border)' : 'transparent',
-          boxShadow: scrolled ? '0 20px 40px rgba(0,0,0,0.3)' : 'none',
+          boxShadow: scrolled ? '0 15px 35px rgba(0,0,0,0.2)' : 'none',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          position: 'relative'
         }}
       >
         <div
           className="heading-display text-gradient"
           style={{ 
-            fontSize: 'clamp(1.1rem, 1.5vw, 1.6rem)', 
+            fontSize: 'clamp(1rem, 1.4vw, 1.4rem)', 
             cursor: 'pointer', 
             fontWeight: 800,
-            letterSpacing: '-1px'
+            letterSpacing: '-0.5px',
+            whiteSpace: 'nowrap'
           }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           CHRIST AMRON
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-          <nav style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-            {['Home', 'About', 'Projects', 'Contact'].map((item) => (
+        {/* Desktop Navigation */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="desktop-nav">
+          <nav style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
+            {navItems.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -91,20 +96,11 @@ const Navbar = () => {
                 style={{
                   color: 'var(--text-primary)',
                   textDecoration: 'none',
-                  fontSize: '0.9rem',
+                  fontSize: '0.85rem',
                   fontWeight: 600,
-                  padding: '8px 20px',
+                  padding: '8px 18px',
                   borderRadius: '100px',
-                  transition: 'var(--transition-smooth)',
-                  position: 'relative'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.background = 'var(--glass-bg)';
-                  e.target.style.boxShadow = 'inset 0 0 10px rgba(255,255,255,0.05)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.background = 'transparent';
-                  e.target.style.boxShadow = 'none';
+                  transition: '0.3s cubic-bezier(0.23, 1, 0.32, 1)',
                 }}
               >
                 {item}
@@ -112,42 +108,130 @@ const Navbar = () => {
             ))}
           </nav>
 
-          <div style={{ width: '1px', height: '20px', background: 'var(--glass-border)' }}></div>
+          <div style={{ width: '1px', height: '18px', background: 'var(--glass-border)', opacity: 0.5 }}></div>
 
           <button
             onClick={toggleTheme}
             className="theme-toggle"
             style={{
-              background: 'var(--glass-bg)',
+              background: 'var(--badge-bg)',
               border: '1px solid var(--glass-border)',
               color: 'var(--text-primary)',
-              width: '40px',
-              height: '40px',
+              width: '38px',
+              height: '38px',
               borderRadius: '50%',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              transition: 'var(--transition-smooth)',
-              fontSize: '1.1rem'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'scale(1.1) rotate(10deg)';
-              e.currentTarget.style.borderColor = 'var(--accent-light)';
-              e.currentTarget.style.boxShadow = '0 0 15px var(--accent-glow)';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-              e.currentTarget.style.borderColor = 'var(--glass-border)';
-              e.currentTarget.style.boxShadow = 'none';
+              transition: 'all 0.4s ease',
+              fontSize: '1rem'
             }}
           >
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="mobile-toggle" style={{ display: 'none', alignItems: 'center', gap: '15px' }}>
+          <button
+            onClick={toggleTheme}
+            style={{
+              background: 'var(--badge-bg)',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-primary)',
+              width: '35px',
+              height: '35px',
+              borderRadius: '50%',
+              fontSize: '0.9rem'
+            }}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--text-primary)',
+              cursor: 'pointer',
+              padding: '5px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px'
+            }}
+          >
+            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', transform: mobileMenuOpen ? 'translateY(8px) rotate(45deg)' : 'none' }} />
+            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', opacity: mobileMenuOpen ? 0 : 1 }} />
+            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', transform: mobileMenuOpen ? 'translateY(-8px) rotate(-45deg)' : 'none' }} />
+          </button>
+        </div>
       </header>
+
+      {/* Mobile Navigation Drawer */}
+      <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          background: 'var(--bg-color)',
+          zIndex: 999,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '30px',
+          transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+          transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)',
+          paddingTop: '80px'
+        }}>
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                color: 'var(--text-primary)',
+                textDecoration: 'none',
+                fontSize: '2.5rem',
+                fontWeight: 700,
+                letterSpacing: '-1px',
+                transition: '0.3s'
+              }}
+              onMouseOver={(e) => e.target.style.color = 'var(--accent)'}
+              onMouseOut={(e) => e.target.style.color = 'var(--text-primary)'}
+            >
+              {item}
+            </a>
+          ))}
+          
+          <button 
+            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              marginTop: '40px',
+              background: 'var(--glass-bg)',
+              border: '1px solid var(--glass-border)',
+              color: 'var(--text-primary)',
+              padding: '12px 25px',
+              borderRadius: '100px',
+              fontSize: '1rem'
+            }}
+          >
+            Close Menu
+          </button>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle { display: flex !important; }
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Navbar;
+
