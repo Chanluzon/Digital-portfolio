@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -9,78 +10,51 @@ import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 
+gsap.registerPlugin(ScrollTrigger);
+
+
 function App() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 0.8, // Decreased duration makes it feel punchier and less 'laggy'
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
       smoothTouch: false,
       touchMultiplier: 2,
+      infinite: false,
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    lenis.on('scroll', ScrollTrigger.update);
 
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
 
-  useGSAP(() => {
-    const handleMouseOver = (e) => {
-      const target = e.target;
-      if (target.classList && (target.classList.contains('heading-display') || target.classList.contains('hero-word'))) {
-        gsap.to(target, { scale: 1.05, y: -2, textShadow: '0px 0px 20px rgba(168, 85, 247, 0.7)', duration: 0.3, ease: 'power2.out' });
-      } else if (target.tagName && target.tagName.toLowerCase() === 'p') {
-        gsap.to(target, { x: 5, color: 'var(--text-primary)', duration: 0.3, ease: 'power2.out' });
-      }
-    };
-
-    const handleMouseOut = (e) => {
-      const target = e.target;
-      if (target.classList && (target.classList.contains('heading-display') || target.classList.contains('hero-word'))) {
-        gsap.to(target, { scale: 1, y: 0, textShadow: '0px 0px 0px rgba(168, 85, 247, 0)', duration: 0.5, ease: 'power2.out' });
-      } else if (target.tagName && target.tagName.toLowerCase() === 'p') {
-        gsap.to(target, { x: 0, color: 'var(--text-secondary)', duration: 0.5, ease: 'power2.out' });
-      }
-    };
-
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', handleMouseOut);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      document.removeEventListener('mouseover', handleMouseOver);
-      document.removeEventListener('mouseout', handleMouseOut);
-    }
-  });
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
+  }, []);
+
 
   return (
     <>
       <Navbar />
-      <div className="animate-fade-in">
-        <main className="glass-panel" style={{
-          width: '100%',
-          minHeight: '100vh',
-          padding: '0 5%',
-          borderRadius: 0,
-          border: 'none',
-          background: 'transparent',
-          boxShadow: 'none'
-        }}>
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
-        </main>
-
-        <Footer />
-      </div>
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }
+
 
 export default App;

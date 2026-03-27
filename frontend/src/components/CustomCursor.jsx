@@ -67,11 +67,12 @@ const CustomCursor = () => {
   useEffect(() => {
     if (isHovering) {
       gsap.to(followerRef.current, {
-        scale: 1.8,
-        background: 'rgba(168, 85, 247, 0.15)',
-        borderColor: 'rgba(168, 85, 247, 0)',
-        duration: 0.3,
-        ease: 'power2.out'
+        scale: 2.2,
+        background: 'rgba(255, 255, 255, 0.1)',
+        borderColor: 'rgba(255, 255, 255, 0)',
+        backdropFilter: 'blur(4px) invert(1)',
+        duration: 0.4,
+        ease: 'power3.out'
       });
       gsap.to(cursorRef.current, { scale: 0, duration: 0.2 });
     } else {
@@ -79,14 +80,14 @@ const CustomCursor = () => {
         scale: 1,
         background: 'transparent',
         borderColor: 'var(--accent-light)',
-        duration: 0.3,
-        ease: 'power2.out'
+        backdropFilter: 'blur(0px) invert(0)',
+        duration: 0.4,
+        ease: 'power3.out'
       });
       gsap.to(cursorRef.current, { scale: 1, duration: 0.2 });
     }
   }, [isHovering]);
 
-  // Only render on devices that support hover
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
     return null;
   }
@@ -102,7 +103,8 @@ const CustomCursor = () => {
           background: '#fff',
           borderRadius: '50%',
           pointerEvents: 'none',
-          zIndex: 9999
+          zIndex: 9999,
+          mixBlendMode: 'difference'
         }}
       />
       <div
@@ -110,7 +112,7 @@ const CustomCursor = () => {
         style={{
           position: 'fixed',
           top: 0, left: 0,
-          width: '44px', height: '44px',
+          width: '40px', height: '40px',
           border: '1px solid var(--accent-light)',
           borderRadius: '50%',
           pointerEvents: 'none',
@@ -120,5 +122,6 @@ const CustomCursor = () => {
     </>
   );
 };
+
 
 export default CustomCursor;

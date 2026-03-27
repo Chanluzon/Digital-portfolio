@@ -11,42 +11,28 @@ const Contact = () => {
   const container = useRef();
 
   useGSAP(() => {
-    gsap.to('.contact-bg', {
-      scrollTrigger: { trigger: container.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
-      y: 150, ease: 'none'
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: 'top 80%'
+      }
     });
-    gsap.fromTo('.contact-info',
-      { x: -80, opacity: 0, filter: 'blur(10px)' },
-      {
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top 80%'
-        },
-        x: 0,
-        opacity: 1,
-        filter: 'blur(0px)',
-        duration: 1.5,
-        ease: 'expo.out'
-      }
-    );
 
-    gsap.fromTo('.contact-form',
-      { x: 80, opacity: 0, filter: 'blur(10px)', rotationY: -15 },
-      {
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top 80%'
-        },
-        x: 0,
-        opacity: 1,
-        filter: 'blur(0px)',
-        rotationY: 0,
-        duration: 1.5,
-        ease: 'expo.out',
-        delay: 0.2,
-        transformPerspective: 1200
-      }
-    );
+    tl.from('.contact-content > *', {
+      y: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 1,
+      ease: 'power4.out'
+    });
+
+    tl.from('.contact-form-container', {
+      scale: 0.95,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power4.out'
+    }, '-=0.8');
+
   }, { scope: container });
 
   const handleChange = (e) => {
@@ -81,7 +67,7 @@ const Contact = () => {
       if (res.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus(''), 3000);
+        setTimeout(() => setStatus(''), 5000);
       } else {
         setStatus('error');
       }
@@ -93,98 +79,117 @@ const Contact = () => {
 
   const inputStyle = {
     width: '100%',
-    padding: '15px 20px',
-    background: 'rgba(255,255,255,0.03)',
+    padding: '16px 20px',
+    background: 'var(--badge-bg)',
     border: '1px solid var(--glass-border)',
-    borderRadius: '8px',
+    borderRadius: '12px',
     color: 'var(--text-primary)',
     fontFamily: 'var(--font-sans)',
     fontSize: '1rem',
     marginBottom: '20px',
     outline: 'none',
-    transition: 'all 0.3s ease'
+    transition: 'var(--transition-smooth)'
   };
 
   return (
-    <section id="contact" ref={container} style={{ padding: '100px 0', minHeight: '80vh', position: 'relative', zIndex: 10 }}>
-      {/* Background glow */}
-      <div className="contact-bg" style={{
-        position: 'absolute', top: '20%', right: '10%', width: '400px', height: '400px',
-        background: 'var(--accent)', filter: 'blur(200px)', opacity: 0.15, borderRadius: '50%', zIndex: -1
-      }}></div>
-
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', gap: '80px', alignItems: 'center',
-        background: 'var(--glass-bg)', padding: '60px', borderRadius: '24px', border: '1px solid var(--glass-border)',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.2)'
-      }}>
-
-        <div className="contact-info" style={{ flex: '1 1 350px' }}>
-          <h2 className="heading-display text-gradient" style={{ fontSize: '3.5rem', marginBottom: '20px' }}>Let's Connect</h2>
-          <div style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '2px' }}></div>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: 1.6, marginBottom: '40px' }}>
-            Have a project in mind, or just want to say hi? I'm always open to discussing new opportunities, creative ideas or visions to be part of.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', color: 'var(--text-primary)', fontSize: '1.1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>✉</span>  christamron.luzon@gmail.com
+    <section id="contact" ref={container} className="container" style={{ padding: '80px 0 60px', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
+      <div className="grid-2" style={{ alignItems: 'center', gap: '60px', width: '100%' }}>
+        <div className="contact-content">
+          <h2 className="section-title heading-display" style={{ textAlign: 'left', marginBottom: '20px' }}>
+            <div className="reveal-text">
+              <span className="text-gradient" 
+                style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
+                onMouseEnter={(e) => gsap.to(e.target, { scale: 1.05, rotation: 1, duration: 0.4, ease: 'back.out(1.7)' })}
+                onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
+              >Let's Build Something <br /> Amazing Together.</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ color: 'var(--accent-light)', fontSize: '1.3rem' }}>📍</span>Cebu City, Cebu 6000, Philippines.
+          </h2>
+
+          <div style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '100px' }}></div>
+          
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '40px', maxWidth: '480px' }}>
+            Have a project in mind or just want to chat? I'm always open to new opportunities and interesting collaborations.
+          </p>
+
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+            <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+                ✉
+              </div>
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Email</div>
+                <div style={{ fontWeight: 600 }}>christamron.luzon@gmail.com</div>
+              </div>
+            </div>
+
+            <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+                📍
+              </div>
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Location</div>
+                <div style={{ fontWeight: 600 }}>Cebu City, Philippines</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="contact-form" style={{ flex: '1 1 400px' }}>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-            <input
-              type="text" name="name" placeholder="Your Name" required
-              value={formData.name} onChange={handleChange} style={inputStyle}
-              onFocus={(e) => Object.assign(e.target.style, { borderColor: 'var(--accent-light)', background: 'rgba(255,255,255,0.05)' })}
-              onBlur={(e) => Object.assign(e.target.style, { borderColor: 'var(--glass-border)', background: 'rgba(255,255,255,0.03)' })}
-            />
-            <input
-              type="email" name="email" placeholder="Your Email" required
-              disabled={!formData.name.trim()}
-              title={!formData.name.trim() ? "Please enter your name first" : ""}
-              value={formData.email} onChange={handleChange} style={{ ...inputStyle, opacity: !formData.name.trim() ? 0.4 : 1, cursor: !formData.name.trim() ? 'not-allowed' : 'text' }}
-              onFocus={(e) => Object.assign(e.target.style, { borderColor: 'var(--accent-light)', background: 'rgba(255,255,255,0.05)' })}
-              onBlur={(e) => Object.assign(e.target.style, { borderColor: 'var(--glass-border)', background: 'rgba(255,255,255,0.03)' })}
-            />
-            <textarea
-              name="message" rows="5" placeholder="Your Message" required
-              disabled={!/^[^\s@]+@gmail\.com$/i.test(formData.email.trim())}
-              title={!/^[^\s@]+@gmail\.com$/i.test(formData.email.trim()) ? "Please enter a valid @gmail.com address first" : ""}
-              value={formData.message} onChange={handleChange} style={{ ...inputStyle, resize: 'vertical', opacity: !/^[^\s@]+@gmail\.com$/i.test(formData.email.trim()) ? 0.4 : 1, cursor: !/^[^\s@]+@gmail\.com$/i.test(formData.email.trim()) ? 'not-allowed' : 'text' }}
-              onFocus={(e) => Object.assign(e.target.style, { borderColor: 'var(--accent-light)', background: 'rgba(255,255,255,0.05)' })}
-              onBlur={(e) => Object.assign(e.target.style, { borderColor: 'var(--glass-border)', background: 'rgba(255,255,255,0.03)' })}
-            ></textarea>
+        <div className="contact-form-container">
+          <div className="glass-panel" style={{ padding: '50px', background: 'var(--glass-bg)' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ marginBottom: '5px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Full Name</div>
+              <input
+                type="text" name="name" placeholder="John Doe" required
+                value={formData.name} onChange={handleChange} style={inputStyle}
+                onFocus={(e) => { e.target.style.borderColor = 'var(--accent-light)'; e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.boxShadow = '0 0 15px var(--accent-glow)'; }}
+                onBlur={(e) => { e.target.style.borderColor = 'var(--glass-border)'; e.target.style.background = 'var(--badge-bg)'; e.target.style.boxShadow = 'none'; }}
+              />
 
-            <button type="submit" className="btn-primary" disabled={status === 'sending'} style={{
-              padding: '16px', fontSize: '1.1rem', opacity: status === 'sending' ? 0.7 : 1, marginTop: '10px'
-            }}>
-              {status === 'sending' ? 'Sending...' : 'Send Message'}
-            </button>
+              <div style={{ marginBottom: '5px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Work Email</div>
+              <input
+                type="email" name="email" placeholder="john@example.com" required
+                disabled={!formData.name.trim()}
+                value={formData.email} onChange={handleChange} 
+                style={{ ...inputStyle, opacity: !formData.name.trim() ? 0.3 : 1, cursor: !formData.name.trim() ? 'not-allowed' : 'text' }}
+                onFocus={(e) => { e.target.style.borderColor = 'var(--accent-light)'; e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.boxShadow = '0 0 15px var(--accent-glow)'; }}
+                onBlur={(e) => { e.target.style.borderColor = 'var(--glass-border)'; e.target.style.background = 'var(--badge-bg)'; e.target.style.boxShadow = 'none'; }}
+              />
 
-            {status === 'invalid_email' && (
-              <p style={{ color: '#f87171', marginTop: '15px', textAlign: 'center', padding: '10px', background: 'rgba(248, 113, 113, 0.1)', borderRadius: '8px' }}>
-                Please use a valid @gmail.com address.
-              </p>
-            )}
-            {status === 'error' && (
-              <p style={{ color: '#f87171', marginTop: '15px', textAlign: 'center', padding: '10px', background: 'rgba(248, 113, 113, 0.1)', borderRadius: '8px' }}>
-                Something went wrong. Please try again.
-              </p>
-            )}
-          </form>
+              <div style={{ marginBottom: '5px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Message</div>
+              <textarea
+                name="message" rows="5" placeholder="Tell me about your project..." required
+                disabled={!/^[^\s@]+@gmail\.com$/i.test(formData.email.trim())}
+                value={formData.message} onChange={handleChange} 
+                style={{ ...inputStyle, resize: 'none', opacity: !/^[^\s@]+@gmail\.com$/i.test(formData.email.trim()) ? 0.3 : 1, cursor: !/^[^\s@]+@gmail\.com$/i.test(formData.email.trim()) ? 'not-allowed' : 'text' }}
+                onFocus={(e) => { e.target.style.borderColor = 'var(--accent-light)'; e.target.style.background = 'rgba(255,255,255,0.05)'; e.target.style.boxShadow = '0 0 15px var(--accent-glow)'; }}
+                onBlur={(e) => { e.target.style.borderColor = 'var(--glass-border)'; e.target.style.background = 'var(--badge-bg)'; e.target.style.boxShadow = 'none'; }}
+              />
+
+
+              <button type="submit" className="btn-primary" disabled={status === 'sending'} style={{ padding: '18px', fontSize: '1.1rem', marginTop: '10px' }}>
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
+              </button>
+
+              {status === 'invalid_email' && (
+                <div style={{ color: '#f87171', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
+                  Please use a valid @gmail.com address.
+                </div>
+              )}
+              {status === 'error' && (
+                <div style={{ color: '#f87171', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
+                  Something went wrong. Please try again later.
+                </div>
+              )}
+            </form>
+          </div>
         </div>
-
       </div>
 
-      {/* Success Modal */}
+      {/* Success Overlay */}
       {status === 'success' && (
         <div style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
@@ -192,22 +197,36 @@ const Contact = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 9999,
-          background: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)'
+          zIndex: 10000,
+          background: 'rgba(8, 8, 12, 0.8)',
+          backdropFilter: 'blur(10px)',
         }}>
-          <div className="glass-panel animate-fade-in" style={{
-            padding: '50px 70px',
+          <div className="glass-panel" style={{
+            padding: '60px 80px',
             textAlign: 'center',
-            background: 'var(--glass-bg)',
-            border: '1px solid rgba(74, 222, 128, 0.3)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-            maxWidth: '500px',
-            width: '90%'
+            maxWidth: '600px',
+            width: '90%',
+            transform: 'scale(1)',
+            animation: 'fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
           }}>
-            <h3 className="heading-display" style={{ fontSize: '2.5rem', color: 'var(--text-primary)', marginBottom: '15px' }}>Inquiry Received</h3>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.6 }}>Thank you for reaching out. Your message has been successfully delivered, and I will be in touch with you shortly.</p>
+            <div style={{ 
+              width: '80px', 
+              height: '80px', 
+              borderRadius: '50%', 
+              background: 'rgba(34, 197, 94, 0.1)', 
+              color: '#22c55e', 
+              fontSize: '2.5rem', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              margin: '0 auto 30px'
+            }}>
+              ✓
+            </div>
+            <h3 className="heading-display" style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Message Sent!</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: 1.6 }}>
+              Thank you for reaching out. I've received your inquiry and will get back to you as soon as possible.
+            </p>
           </div>
         </div>
       )}

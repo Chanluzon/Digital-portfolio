@@ -28,7 +28,13 @@ app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-// Start the server
-app.listen(PORT, () => {
+// Export the app for Netlify Functions (serverless)
+module.exports = app;
+
+// Start the server only if NOT in a Netlify function environment
+if (process.env.NODE_ENV !== 'production' && !process.env.NETLIFY) {
+  app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
-});
+  });
+}
+

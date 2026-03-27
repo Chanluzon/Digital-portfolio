@@ -11,9 +11,11 @@ const About = () => {
   const container = useRef();
 
   useEffect(() => {
+    console.log('Fetching skills...');
     fetch('/api/skills')
       .then(res => res.json())
       .then(data => {
+        console.log('Skills loaded:', data);
         setSkills(data);
         setLoading(false);
       })
@@ -24,103 +26,140 @@ const About = () => {
   }, []);
 
   useGSAP(() => {
-    gsap.to('.about-bg', {
-      scrollTrigger: { trigger: container.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
-      y: 200, ease: 'none'
-    });
-    const tl = gsap.timeline({
+    if (!container.current) return;
+
+    const headTl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
-        start: 'top 85%'
+        start: 'top 85%',
+        toggleActions: 'play none none none'
       }
     });
 
-    tl.fromTo('.about-text',
-      { y: 60, opacity: 0, filter: 'blur(15px)', x: -30 },
-      { y: 0, opacity: 1, filter: 'blur(0px)', x: 0, duration: 1.2, stagger: 0.25, ease: 'power4.out' }
+    headTl.fromTo('.about-content .reveal-text > span',
+      { y: '100%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 1.2, ease: 'power4.out' }
+    );
+
+    headTl.fromTo('.about-content p',
+      { y: 30, opacity: 0, filter: 'blur(10px)' },
+      { y: 0, opacity: 1, filter: 'blur(0px)', stagger: 0.2, duration: 1, ease: 'expo.out' },
+      '-=0.8'
     );
 
     if (!loading && skills.length > 0) {
-      tl.fromTo('.skill-badge',
-        { scale: 0.2, opacity: 0, y: 30, rotationZ: -15 },
-        { scale: 1, opacity: 1, y: 0, rotationZ: 0, duration: 0.6, stagger: 0.04, ease: 'back.out(1.5)' },
-        '-=0.8'
+      gsap.fromTo('.skills-card',
+        { x: 50, opacity: 0, filter: 'blur(15px)' },
+        {
+          scrollTrigger: {
+            trigger: container.current,
+            start: 'top 75%'
+          },
+          x: 0,
+          opacity: 1,
+          filter: 'blur(0px)',
+          duration: 1.5,
+          ease: 'expo.out'
+        }
+      );
+
+      gsap.fromTo('.skill-badge',
+        { scale: 0.3, opacity: 0, filter: 'blur(10px)' },
+        { scale: 1, opacity: 1, filter: 'blur(0px)', stagger: 0.05, duration: 0.6, ease: 'back.out(1.7)', delay: 0.5 }
       );
     }
   }, { scope: container, dependencies: [loading, skills] });
 
+
   return (
-    <section id="about" ref={container} style={{ padding: '100px 0', minHeight: '80vh', position: 'relative', zIndex: 10 }}>
-      {/* Background glow */}
-      <div className="about-bg" style={{
-        position: 'absolute', bottom: '10%', left: '-10%', width: '500px', height: '500px',
-        background: 'var(--accent-light)', filter: 'blur(200px)', opacity: 0.1, borderRadius: '50%', zIndex: -1
-      }}></div>
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '80px', alignItems: 'center' }}>
-
-        {/* Bio Section */}
-        <div style={{ flex: '1 1 400px' }}>
-          <h2 className="heading-display text-gradient about-text" style={{ fontSize: '3rem', marginBottom: '30px' }}>About Me</h2>
-          <div className="about-text" style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '2px' }}></div>
-          <p className="about-text" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8, marginBottom: '20px' }}>
-            I’m a passionate software engineer based in Cebu City, with a strong focus on crafting deeply interactive, premium web experiences—primarily on the frontend. I specialize in building visually refined interfaces, from pixel-perfect glassmorphism designs using React and Tailwind to smooth, engaging animations that elevate user experience.
-          </p>
-          <p className="about-text" style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
-            While I have experience working across the full stack with technologies like Node.js and Firebase, my core drive lies in creating frontend experiences that are both aesthetically compelling and highly functional. Whether developing AI-powered applications like SpeakForge or designing seamless UI interactions, I aim to build technology that feels as good as it looks.
-          </p>
-        </div>
-
-        {/* Skills Section */}
-        <div id="skills" style={{ flex: '1 1 450px', scrollMarginTop: '100px' }} className="about-text">
-          <div className="glass-panel" style={{ padding: '40px', background: 'rgba(255,255,255,0.02)' }}>
-            <h3 className="heading-display" style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '35px' }}>
-              My Arsenal
-            </h3>
-
-            {loading ? (
-              <div style={{ color: 'var(--accent-light)', fontSize: '1.1rem' }}>Loading Skills...</div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                {skills.map(skillGroup => (
-                  <div key={skillGroup.category}>
-                    <h4 style={{ color: 'var(--text-secondary)', marginBottom: '15px', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                      {skillGroup.category}
-                    </h4>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-                      {skillGroup.items.map(item => (
-                        <span key={item} className="skill-badge" style={{
-                          padding: '10px 18px',
-                          background: 'rgba(255,255,255,0.05)',
-                          borderRadius: '8px',
-                          color: 'var(--text-primary)',
-                          fontSize: '0.9rem',
-                          fontWeight: 500,
-                          border: '1px solid rgba(255,255,255,0.08)',
-                          transition: 'all 0.3s ease',
-                          cursor: 'default'
-                        }}
-                          onMouseOver={(e) => {
-                            e.target.style.background = 'rgba(168, 85, 247, 0.2)';
-                            e.target.style.borderColor = 'var(--accent-light)';
-                            e.target.style.transform = 'translateY(-2px)';
-                          }}
-                          onMouseOut={(e) => {
-                            e.target.style.background = 'rgba(255,255,255,0.05)';
-                            e.target.style.borderColor = 'rgba(255,255,255,0.08)';
-                            e.target.style.transform = 'translateY(0)';
-                          }}>
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+    <section id="about" ref={container} style={{ padding: '80px 0 60px', position: 'relative', zIndex: 10 }}>
+      <div className="container">
+        <div className="grid-2" style={{ alignItems: 'flex-start' }}>
+          {/* Bio Section */}
+          <div className="about-content">
+            <h2 className="section-title heading-display" style={{ textAlign: 'left', marginBottom: '20px' }}>
+              <div className="reveal-text">
+                <span className="text-gradient" 
+                  style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
+                  onMouseEnter={(e) => gsap.to(e.target, { scale: 1.05, rotation: 1, duration: 0.4, ease: 'back.out(1.7)' })}
+                  onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
+                >About Me</span>
               </div>
-            )}
+            </h2>
+
+            <div style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '100px' }}></div>
+
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
+                I'm a passionate software engineer based in <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Cebu City</span>, focused on crafting deeply interactive, premium web experiences. I specialize in building visually refined interfaces that combine pixel-perfect design with smooth, engaging animations.
+              </p>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
+                My core drive lies in creating frontend experiences that are both aesthetically compelling and highly functional. Whether I me building AI-powered applications or designing seamless UI interactions, I aim to build technology that feels as good as it looks.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Skills Section */}
+          <div className="skills-card">
+            <div className="glass-panel" style={{ padding: '35px', background: 'var(--glass-bg)' }}>
+              <h3 className="heading-display" style={{ fontSize: '2.2rem', marginBottom: '25px', letterSpacing: '-1px' }}>
+                My Skills
+              </h3>
+
+              {loading ? (
+                <div className="heading-display" style={{ opacity: 0.5 }}>Loading...</div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+
+                  {skills.map(skillGroup => (
+                    <div key={skillGroup.category}>
+                      <h4 style={{
+                        color: 'var(--accent-light)',
+                        marginBottom: '20px',
+                        fontSize: '0.9rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '2px',
+                        fontWeight: 800
+                      }}>
+                        {skillGroup.category}
+                      </h4>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                        {skillGroup.items.map(item => (
+                          <span key={item} className="skill-badge" style={{
+                            padding: '10px 20px',
+                            background: 'var(--badge-bg)',
+                            borderRadius: '12px',
+                            color: 'var(--text-primary)',
+                            fontSize: '0.9rem',
+                            fontWeight: 600,
+                            border: '1px solid var(--glass-border)',
+                            transition: 'var(--transition-smooth)',
+                            cursor: 'default'
+                          }}
+                            onMouseOver={(e) => {
+                              e.target.style.background = 'rgba(139, 92, 246, 0.1)';
+                              e.target.style.borderColor = 'var(--accent-light)';
+                              e.target.style.boxShadow = '0 0 15px var(--accent-glow)';
+                            }}
+                            onMouseOut={(e) => {
+                              e.target.style.background = 'var(--badge-bg)';
+                              e.target.style.borderColor = 'var(--glass-border)';
+                              e.target.style.boxShadow = 'none';
+                            }}>
+
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );
