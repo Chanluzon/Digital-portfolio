@@ -46,10 +46,26 @@ const projects = [
 ];
 
 const skills = [
-    { category: 'Frontend', items: ['React', 'Html', 'Css', 'Javascript', 'TypeScript', 'Tailwind'] },
-    { category: 'Backend', items: ['Node.js', 'Express',] },
-    { category: 'Database', items: ['PostgreSQL', 'MySql', 'Firebase'] },
-    { category: 'DevOps', items: ['AWS', 'GitHub Actions'] }
+    { 
+        category: 'Frontend & Web Development', 
+        items: ['ReactJS', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive Web Design'] 
+    },
+    { 
+        category: 'Backend & Frameworks', 
+        items: ['Python', 'Django', 'Node.js', 'Express.js', 'Firebase', 'REST APIs'] 
+    },
+    { 
+        category: 'Databases & Version Control', 
+        items: ['PostgreSQL', 'MySQL', 'Firebase DB', 'Git & GitHub', 'VS Code'] 
+    },
+    { 
+        category: 'QA Testing & Engineering', 
+        items: ['Manual Testing', 'Functional Testing', 'Bug Identification', 'Debugging & Troubleshooting', 'API Integration'] 
+    },
+    { 
+        category: 'Soft Skills & Attributes', 
+        items: ['Problem Solving', 'Attention to Detail', 'Analytical Thinking', 'Team Collaboration', 'Communication', 'Adaptability', 'Time Management'] 
+    }
 ];
 
 // Routes
