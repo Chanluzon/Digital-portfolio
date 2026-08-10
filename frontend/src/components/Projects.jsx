@@ -118,12 +118,10 @@ const Projects = () => {
           </p>
         </div>
 
-
-
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          gap: '40px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '30px',
           perspective: '1500px'
         }}>
           {loading ? (
@@ -147,12 +145,19 @@ const Projects = () => {
                   transformStyle: 'preserve-3d'
                 }}
               >
-                <div style={{ height: '260px', overflow: 'hidden', position: 'relative', transform: 'translateZ(20px)' }}>
+                <div style={{ height: '240px', overflow: 'hidden', position: 'relative', transform: 'translateZ(20px)' }}>
                   <img
                     src={project.image}
                     alt={project.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'top',
+                      transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                    }}
                   />
+                  
                   <div style={{
                     position: 'absolute',
                     top: '20px',
@@ -169,7 +174,7 @@ const Projects = () => {
                     {project.category || 'Development'}
                   </div>
                 </div>
-                <div style={{ padding: '40px', flex: 1, display: 'flex', flexDirection: 'column', transform: 'translateZ(30px)' }}>
+                <div style={{ padding: 'clamp(20px, 5vw, 36px)', flex: 1, display: 'flex', flexDirection: 'column', transform: 'translateZ(30px)' }}>
                   <h3 className="heading-display" style={{ fontSize: '2rem', marginBottom: '15px', letterSpacing: '-1px' }}>{project.title}</h3>
                   <p style={{ color: 'var(--text-secondary)', marginBottom: '30px', flex: 1, lineHeight: 1.7, fontSize: '1.05rem' }}>
                     {project.description}
@@ -204,7 +209,6 @@ const Projects = () => {
         </div>
       </div>
     </section>
-
   );
 };
 

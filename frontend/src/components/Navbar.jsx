@@ -58,8 +58,8 @@ const Navbar = () => {
       <header
         className="glass-panel"
         style={{
-          width: 'clamp(92%, 95vw, 1300px)',
-          padding: scrolled ? '8px 16px' : '12px 28px',
+          width: 'clamp(90%, 94vw, 1300px)',
+          padding: scrolled ? '8px 14px' : '10px 20px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -74,7 +74,7 @@ const Navbar = () => {
         <div
           className="heading-display text-gradient"
           style={{ 
-            fontSize: 'clamp(1rem, 1.4vw, 1.4rem)', 
+            fontSize: 'clamp(0.95rem, 3.5vw, 1.4rem)', 
             cursor: 'pointer', 
             fontWeight: 800,
             letterSpacing: '-0.5px',

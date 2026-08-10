@@ -122,30 +122,32 @@ const Hero = () => {
 
           <h1 className="hero-headline heading-display" style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', marginBottom: '15px', letterSpacing: '-2px' }}>
             <div className="reveal-text" style={{ display: 'inline-block' }}>
-              <span className="text-gradient" 
+              <span className="text-gradient"
                 style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
                 onMouseEnter={(e) => gsap.to(e.target, { scale: 1.1, rotation: 2, duration: 0.4, ease: 'back.out(1.7)' })}
                 onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
               >Christ</span>
             </div>{' '}
             <div className="reveal-text" style={{ display: 'inline-block' }}>
-              <span className="text-gradient" 
+              <span className="text-gradient"
                 style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
                 onMouseEnter={(e) => gsap.to(e.target, { scale: 1.1, rotation: -2, duration: 0.4, ease: 'back.out(1.7)' })}
                 onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
               >Amron</span>
             </div> <br />
             <div className="reveal-text" style={{ display: 'inline-block' }}>
-              <span style={{ color: 'var(--text-primary)', display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
+              <span className="text-gradient"
+                style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
                 onMouseEnter={(e) => gsap.to(e.target, { scale: 1.1, rotation: 2, duration: 0.4, ease: 'back.out(1.7)' })}
                 onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
               >A.</span>
             </div>{' '}
             <div className="reveal-text" style={{ display: 'inline-block' }}>
-              <span style={{ color: 'var(--text-primary)', display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
+              <span className="text-gradient"
+                style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
                 onMouseEnter={(e) => gsap.to(e.target, { scale: 1.1, rotation: -2, duration: 0.4, ease: 'back.out(1.7)' })}
                 onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
-              >Luzon.</span>
+              >Luzon</span>
             </div>
 
           </h1>
@@ -178,8 +180,8 @@ const Hero = () => {
 
         <div className="hero-image-container" style={{ position: 'relative', display: 'flex', justifyContent: 'center', zIndex: 1, transformStyle: 'preserve-3d' }}>
           <div className="glass-panel" style={{
-            width: 'clamp(280px, 32vw, 480px)',
-            height: 'clamp(350px, 38vw, 580px)',
+            width: 'clamp(240px, 80vw, 480px)',
+            height: 'clamp(300px, 95vw, 580px)',
             borderRadius: '32px',
             overflow: 'hidden',
             position: 'relative',
@@ -200,22 +202,21 @@ const Hero = () => {
             />
           </div>
 
-
           {/* Decorative Floating Card */}
-          <div className="glass-panel" style={{
+          <div className="glass-panel hero-floating-card" style={{
             position: 'absolute',
-            bottom: '40px',
-            left: '-30px',
-            padding: '24px 30px',
-            borderRadius: '24px',
+            bottom: '20px',
+            left: '10px',
+            padding: '16px 24px',
+            borderRadius: '20px',
             zIndex: 2,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             border: '1px solid rgba(255,255,255,0.1)'
           }}>
-            <div style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '0.5px' }}>Frontend</div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Specialist</div>
+            <div style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '0.5px' }}>Frontend</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Specialist</div>
           </div>
 
         </div>

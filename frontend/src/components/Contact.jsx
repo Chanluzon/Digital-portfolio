@@ -136,7 +136,7 @@ const Contact = () => {
         </div>
 
         <div className="contact-form-container">
-          <div className="glass-panel" style={{ padding: '50px', background: 'var(--glass-bg)' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(20px, 6vw, 50px)', background: 'var(--glass-bg)' }}>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ marginBottom: '5px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Full Name</div>
               <input

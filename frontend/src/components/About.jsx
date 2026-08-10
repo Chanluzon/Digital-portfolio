@@ -103,7 +103,7 @@ const About = () => {
 
           {/* Skills Section */}
           <div className="skills-card">
-            <div className="glass-panel" style={{ padding: '35px', background: 'var(--glass-bg)' }}>
+            <div className="glass-panel" style={{ padding: 'clamp(20px, 5vw, 35px)', background: 'var(--glass-bg)' }}>
               <h3 className="heading-display" style={{ fontSize: '2.2rem', marginBottom: '25px', letterSpacing: '-1px' }}>
                 My Skills
               </h3>
