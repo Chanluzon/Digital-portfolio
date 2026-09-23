@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,9 +42,11 @@ const Navbar = () => {
       left: 0, 
       zIndex: 1000, 
       padding: scrolled ? '12px 0' : '25px 0',
-      transition: 'var(--transition-smooth)'
+      transition: 'var(--transition-smooth)',
+      opacity: scrolled ? 1 : 0,
+      transform: scrolled ? 'translateY(0)' : 'translateY(-24px)',
+      pointerEvents: scrolled ? 'auto' : 'none'
     }}>
-      {/* Scroll Progress Bar */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -58,16 +61,17 @@ const Navbar = () => {
       <header
         className="glass-panel"
         style={{
-          width: 'clamp(90%, 94vw, 1300px)',
-          padding: scrolled ? '8px 14px' : '10px 20px',
+          width: 'min(92%, 1080px)',
+          padding: '10px 14px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderRadius: '100px',
-          background: scrolled ? 'var(--glass-bg)' : 'transparent',
-          borderColor: scrolled ? 'var(--glass-border)' : 'transparent',
-          boxShadow: scrolled ? '0 15px 35px rgba(0,0,0,0.2)' : 'none',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderRadius: '18px',
+          background: 'var(--nav-glass-bg)',
+          borderColor: 'var(--nav-glass-border)',
+          boxShadow: '0 12px 30px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.65)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
           position: 'relative'
         }}
       >
@@ -77,7 +81,7 @@ const Navbar = () => {
             fontSize: 'clamp(0.95rem, 3.5vw, 1.4rem)', 
             cursor: 'pointer', 
             fontWeight: 800,
-            letterSpacing: '-0.5px',
+            letterSpacing: '0.04em',
             whiteSpace: 'nowrap'
           }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -85,9 +89,8 @@ const Navbar = () => {
           CHRIST AMRON
         </div>
 
-        {/* Desktop Navigation */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }} className="desktop-nav">
-          <nav style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} className="desktop-nav">
+          <nav style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
             {navItems.map((item) => (
               <a
                 key={item}
@@ -98,8 +101,8 @@ const Navbar = () => {
                   textDecoration: 'none',
                   fontSize: '0.85rem',
                   fontWeight: 600,
-                  padding: '8px 18px',
-                  borderRadius: '100px',
+                  padding: '9px 13px',
+                  borderRadius: '10px',
                   transition: '0.3s cubic-bezier(0.23, 1, 0.32, 1)',
                 }}
               >
@@ -108,7 +111,7 @@ const Navbar = () => {
             ))}
           </nav>
 
-          <div style={{ width: '1px', height: '18px', background: 'var(--glass-border)', opacity: 0.5 }}></div>
+          <div style={{ width: '1px', height: '24px', background: 'var(--glass-border)', opacity: 0.7 }}></div>
 
           <button
             onClick={toggleTheme}
@@ -119,20 +122,20 @@ const Navbar = () => {
               color: 'var(--text-primary)',
               width: '38px',
               height: '38px',
-              borderRadius: '50%',
+              borderRadius: '10px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               transition: 'all 0.4s ease',
-              fontSize: '1rem'
+              fontSize: '1rem',
+              padding: 0
             }}
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <Sun size={17} strokeWidth={2} /> : <Moon size={17} strokeWidth={2} />}
           </button>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className="mobile-toggle" style={{ display: 'none', alignItems: 'center', gap: '15px' }}>
           <button
             onClick={toggleTheme}
@@ -142,11 +145,16 @@ const Navbar = () => {
               color: 'var(--text-primary)',
               width: '35px',
               height: '35px',
-              borderRadius: '50%',
-              fontSize: '0.9rem'
+              borderRadius: '10px',
+              fontSize: '0.9rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0
             }}
           >
-            {theme === 'dark' ? '☀️' : '🌙'}
+            {theme === 'dark' ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
           </button>
           
           <button 
@@ -162,14 +170,11 @@ const Navbar = () => {
               gap: '6px'
             }}
           >
-            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', transform: mobileMenuOpen ? 'translateY(8px) rotate(45deg)' : 'none' }} />
-            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', opacity: mobileMenuOpen ? 0 : 1 }} />
-            <div style={{ width: '24px', height: '2px', background: 'currentColor', transition: '0.3s', transform: mobileMenuOpen ? 'translateY(-8px) rotate(-45deg)' : 'none' }} />
+            {mobileMenuOpen ? <X size={25} strokeWidth={1.8} /> : <Menu size={25} strokeWidth={1.8} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer */}
       <div style={{
           position: 'fixed',
           top: 0,
@@ -224,6 +229,16 @@ const Navbar = () => {
       </div>
 
       <style>{`
+        .nav-link:hover {
+          background: var(--badge-bg);
+          color: var(--text-primary) !important;
+        }
+
+        .theme-toggle:hover {
+          background: var(--glass-hover) !important;
+          border-color: var(--text-primary) !important;
+        }
+
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle { display: flex !important; }

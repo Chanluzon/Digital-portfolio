@@ -18,7 +18,7 @@ const projects = [
     {
         id: 1,
         title: 'SpeakForge - Android Mobile Application',
-        description: 'SpeakForge is an AI-Powered multilingual communication tool designed to eliminate language barriers by integrating real-time text and voice translation into chat-based conversations. The project addresses the growing need for seamless cross-lingual communication, particularly among international students, tourists, expatriates, and businesses operating in Cebu. By leveraging advanced AI-powered translation services, speech recognition technology, and intuitive user interfaces, SpeakForge facilitates effortless communication between Bisaya speaking communities and non-native speakers.',
+        description: 'An AI-powered multilingual chat app with real-time text and voice translation, helping Bisaya-speaking communities communicate with non-native speakers.',
         techStack: ['Java', 'Android Studio', 'Firebase', 'Django', 'Python', 'Claude AI', 'DeepSeek', 'Gemini AI'],
         image: '/speakforge.png',
         imageFit: 'contain',
@@ -27,8 +27,8 @@ const projects = [
     },
     {
         id: 2,
-        title: 'Data Privacy Risk Assessment',
-        description: 'A comprehensive compliance assessment platform designed to evaluate organizational adherence to NIST Cybersecurity Framework (CSF) 2.0. The system facilitates risk assessments through structured questionnaires, tracks compliance status, and provides actionable insights for improving data privacy posture.\n\nThe questionnaire is designed to assess an organization\'s data privacy risk posture by evaluating controls and practices against the six Core Functions of the NIST Cybersecurity Framework 2.0: Govern, Identify, Protect, Detect, Respond, and Recover. Each question is mapped to a specific CSF Category or Subcategory reference.\n\nThis platform serves as a complete risk assessment solution for organizations seeking to evaluate and enhance their data privacy practices in alignment with NIST standards.',
+        title: 'WISPHIL- DATA PRIVACY RISK ASSESSMENT',
+        description: 'A comprehensive compliance assessment platform designed to evaluate organizational adherence to NIST Cybersecurity Framework (CSF) 2.0. The system facilitates risk assessments through structured questionnaires, tracks compliance status, and provides actionable insights for improving data privacy posture.',
         techStack: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Node.js', 'Express', 'PostgreSQL', 'JWT'],
         image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
         liveLink: 'https://example.com/nexus',
@@ -37,11 +37,21 @@ const projects = [
     {
         id: 3,
         title: 'WISPHIL-NIST CSF Assessment Platform',
-        description: 'WISPHIL-NIST is a web application that helps organizations measure, document, and report their cybersecurity posture using the NIST Cybersecurity Framework (CSF) 2.0. It guides teams through structured assessments, manages role-based access for organization members and moderators, and produces audit-ready summaries and PDF reports from assessment results. The platform is intended for organizations that need a consistent way to capture CSF-aligned answers, track progress over time, and share outcomes with internal stakeholders or regulators.\n\nThe assessment model is built around the six NIST CSF core functions: Govern, Identify, Protect, Detect, Respond, and Recover. Assessment questions are organized by function, category, and subcategory. Responses are used to calculate compliance and risk-related summaries, which can also be exported as PDF reports.',
+        description: 'A NIST CSF 2.0 assessment platform that helps organizations measure cybersecurity posture through structured questionnaires, track compliance progress, and generate audit-ready reports.',
         techStack: ['React 19', 'TypeScript', 'Tailwind CSS 4', 'shadcn/ui', 'Node.js', 'Express 5', 'PostgreSQL', 'Puppeteer', 'JWT'],
         image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80',
         liveLink: 'https://example.com/enigma',
         githubLink: 'https://github.com/example/enigma'
+    },
+    {
+        id: 4,
+        title: 'TTX - Tabletop Exercise Game Platform',
+        description: 'A full-stack cybersecurity tabletop exercise platform where teams respond to threat scenarios by selecting security response cards. Moderators configure exercises, activate threats, manage timed rounds, and evaluate team performance through real-time scoring and leaderboards.',
+        techStack: ['React 19', 'Vite 7', 'Tailwind CSS 4', 'DaisyUI', 'React Router 7', 'Node.js', 'Express 5', 'PostgreSQL', 'JWT'],
+        image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80',
+        category: 'Cybersecurity',
+        liveLink: 'https://github.com/Chanluzon/Incident-response-ttx',
+        githubLink: 'https://github.com/Chanluzon/Incident-response-ttx'
     }
 ];
 

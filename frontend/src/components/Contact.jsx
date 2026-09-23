@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Mail, MapPin } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -114,8 +115,8 @@ const Contact = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
             <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
-                ✉
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+                <Mail size={20} strokeWidth={2} />
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Email</div>
@@ -124,8 +125,8 @@ const Contact = () => {
             </div>
 
             <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
-                📍
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+                <MapPin size={20} strokeWidth={2} />
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Location</div>
@@ -172,12 +173,12 @@ const Contact = () => {
               </button>
 
               {status === 'invalid_email' && (
-                <div style={{ color: '#f87171', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
+                <div style={{ color: 'var(--text-primary)', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
                   Please use a valid @gmail.com address.
                 </div>
               )}
               {status === 'error' && (
-                <div style={{ color: '#f87171', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
+                <div style={{ color: 'var(--text-primary)', marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 600 }}>
                   Something went wrong. Please try again later.
                 </div>
               )}
@@ -213,8 +214,8 @@ const Contact = () => {
               width: '80px', 
               height: '80px', 
               borderRadius: '50%', 
-              background: 'rgba(34, 197, 94, 0.1)', 
-              color: '#22c55e', 
+              background: 'rgba(255, 255, 255, 0.1)',
+              color: 'var(--text-primary)',
               fontSize: '2.5rem', 
               display: 'flex', 
               alignItems: 'center', 

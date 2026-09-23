@@ -12,17 +12,16 @@ const Hero = () => {
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-    // Cinematic reveal for the badge
-    tl.fromTo('.hero-badge',
-      { y: 30, opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-      { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2, delay: 0.5 }
-    );
-
-    // Advanced word staggering with masking
     tl.fromTo('.hero-headline .reveal-text > span',
       { y: '110%', opacity: 0, rotationX: -15 },
       { y: '0%', opacity: 1, rotationX: 0, stagger: 0.1, duration: 1.5, ease: 'power4.out' },
       '-=0.8'
+    );
+
+    tl.fromTo('.hero-role',
+      { y: 20, opacity: 0, filter: 'blur(8px)' },
+      { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'expo.out' },
+      '-=0.9'
     );
 
 
@@ -52,7 +51,6 @@ const Hero = () => {
       ease: 'expo.out'
     }, '-=1.2');
 
-    // Floating animation for orbs
     gsap.to('.hero-orb-1', {
       y: 120, x: 80, rotation: 15, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut'
     });
@@ -90,9 +88,8 @@ const Hero = () => {
       alignItems: 'center',
       position: 'relative',
       overflow: 'hidden',
-      padding: '80px 0 40px' /* Reduced padding to fit on load */
+      padding: '70px 0 25px'
     }}>
-      {/* Dynamic Background Elements */}
       <div className="hero-orb-1" style={{
         position: 'absolute', top: '5%', left: '-10%', width: '600px', height: '600px',
         background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
@@ -104,23 +101,9 @@ const Hero = () => {
         opacity: 0.1, filter: 'blur(100px)', zIndex: -1
       }} />
 
-      <div className="container grid-2" style={{ alignItems: 'center' }}>
-        <div className="hero-content" style={{ zIndex: 2 }}>
-          <div className="hero-badge glass-panel" style={{
-            display: 'inline-block',
-            padding: '8px 20px',
-            borderRadius: '100px',
-            marginBottom: '20px', /* Reduced margin */
-            fontSize: '0.9rem',
-            fontWeight: 700,
-            color: 'var(--accent-light)',
-            border: '1px solid rgba(192, 132, 252, 0.2)',
-            background: 'var(--badge-bg)'
-          }}>
-            Welcome to my portfolio
-          </div>
-
-          <h1 className="hero-headline heading-display" style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', marginBottom: '15px', letterSpacing: '-2px' }}>
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '22px' }}>
+        <div className="hero-content" style={{ zIndex: 2, order: 2, width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h1 className="hero-headline heading-display" style={{ fontSize: 'clamp(1.65rem, 7.5vw, 4.25rem)', marginBottom: '8px', letterSpacing: '0', whiteSpace: 'nowrap' }}>
             <div className="reveal-text" style={{ display: 'inline-block' }}>
               <span className="text-gradient"
                 style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
@@ -134,7 +117,7 @@ const Hero = () => {
                 onMouseEnter={(e) => gsap.to(e.target, { scale: 1.1, rotation: -2, duration: 0.4, ease: 'back.out(1.7)' })}
                 onMouseLeave={(e) => gsap.to(e.target, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' })}
               >Amron</span>
-            </div> <br />
+            </div>{' '}
             <div className="reveal-text" style={{ display: 'inline-block' }}>
               <span className="text-gradient"
                 style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
@@ -152,20 +135,35 @@ const Hero = () => {
 
           </h1>
 
+          <div className="hero-role" style={{
+            color: 'var(--text-primary)',
+            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '14px',
+            cursor: 'default',
+            transition: 'var(--transition-smooth)'
+          }}
+            onMouseEnter={(e) => gsap.to(e.currentTarget, { scale: 1.06, letterSpacing: '0.12em', duration: 0.4, ease: 'back.out(1.7)' })}
+            onMouseLeave={(e) => gsap.to(e.currentTarget, { scale: 1, letterSpacing: '0.08em', duration: 0.4, ease: 'power2.out' })}
+          >
+            Full Stack Developer
+          </div>
 
           <p className="hero-desc" style={{
             fontSize: 'clamp(1rem, 1.1vw, 1.15rem)',
             color: 'var(--text-secondary)',
-            maxWidth: '520px',
+            maxWidth: '650px',
             lineHeight: 1.6,
-            marginBottom: '35px',
+            marginBottom: '20px',
             fontWeight: 400
           }}>
             I'm a frontend developer crafting immersive digital experiences through refined code and elegant design. I specialize in building high-performance, visually stunning web applications.
           </p>
 
 
-          <div className="hero-btns" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+          <div className="hero-btns" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href="#projects" style={{ textDecoration: 'none' }}>
               <button className="btn-primary">
                 Explore Work
@@ -178,11 +176,12 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="hero-image-container" style={{ position: 'relative', display: 'flex', justifyContent: 'center', zIndex: 1, transformStyle: 'preserve-3d' }}>
+        <div className="hero-image-container" style={{ position: 'relative', display: 'flex', justifyContent: 'center', zIndex: 1, order: 1, width: '100%', maxWidth: '260px', transformStyle: 'preserve-3d' }}>
           <div className="glass-panel" style={{
-            width: 'clamp(240px, 80vw, 480px)',
-            height: 'clamp(300px, 95vw, 580px)',
-            borderRadius: '32px',
+            width: 'clamp(180px, 48vw, 260px)',
+            height: 'clamp(180px, 48vw, 260px)',
+            aspectRatio: '1',
+            borderRadius: '50%',
             overflow: 'hidden',
             position: 'relative',
             zIndex: 1,
@@ -200,23 +199,6 @@ const Hero = () => {
                 scale: '1.05',
               }}
             />
-          </div>
-
-          {/* Decorative Floating Card */}
-          <div className="glass-panel hero-floating-card" style={{
-            position: 'absolute',
-            bottom: '20px',
-            left: '10px',
-            padding: '16px 24px',
-            borderRadius: '20px',
-            zIndex: 2,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            border: '1px solid rgba(255,255,255,0.1)'
-          }}>
-            <div style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '0.5px' }}>Frontend</div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>Specialist</div>
           </div>
 
         </div>

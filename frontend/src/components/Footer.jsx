@@ -1,6 +1,4 @@
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   const socialLinks = [
     {
       name: 'GitHub',
@@ -95,13 +93,10 @@ const Footer = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
-        gap: '20px'
+        gap: '20px',
+        textAlign: 'center'
       }}>
-        <p>&copy; {currentYear} Christ Amron A. Luzon. All rights reserved.</p>
-        <div style={{ display: 'flex', gap: '30px' }}>
-          <a href="#privacy" style={{ color: 'inherit', textDecoration: 'none' }}>Privacy Policy</a>
-          <a href="#terms" style={{ color: 'inherit', textDecoration: 'none' }}>Terms of Service</a>
-        </div>
+        <p style={{ width: '100%' }}>&copy; 2026 Christ Amron A. Luzon. All rights reserved.</p>
       </div>
     </footer>
   );

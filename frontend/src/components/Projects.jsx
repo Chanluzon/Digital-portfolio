@@ -11,11 +11,9 @@ const Projects = () => {
   const container = useRef();
 
   useEffect(() => {
-    console.log('Fetching projects...');
     fetch('/api/projects')
       .then(res => res.json())
       .then(data => {
-        console.log('Projects loaded:', data);
         setProjects(data);
         setLoading(false);
       })
@@ -28,7 +26,6 @@ const Projects = () => {
   useGSAP(() => {
     if (!container.current) return;
     
-    // Animate header separately so it's always visible regardless of loading state
     const headTl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
@@ -120,10 +117,9 @@ const Projects = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
           gap: '30px',
           perspective: '1500px'
-        }}>
+        }} className="projects-grid">
           {loading ? (
             <div className="flex-center" style={{ gridColumn: '1 / -1', height: '300px' }}>
               <div className="heading-display" style={{ fontSize: '1.5rem', opacity: 0.5 }}>Loading Projects...</div>
@@ -182,13 +178,16 @@ const Projects = () => {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '35px' }}>
                     {project.techStack.map(tech => (
                       <span key={tech} style={{
-                        padding: '6px 14px',
-                        background: 'rgba(139, 92, 246, 0.1)',
-                        border: '1px solid rgba(139, 92, 246, 0.2)',
-                        borderRadius: '100px',
+                        padding: '8px 12px',
+                        background: 'var(--badge-bg)',
+                        border: '1px solid var(--glass-border)',
+                        borderRadius: '6px',
                         fontSize: '0.8rem',
                         fontWeight: 700,
-                        color: 'var(--accent-light)'
+                        color: 'var(--text-primary)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        minHeight: '36px'
                       }}>
                         {tech}
                       </span>

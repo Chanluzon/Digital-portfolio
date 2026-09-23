@@ -11,11 +11,9 @@ const About = () => {
   const container = useRef();
 
   useEffect(() => {
-    console.log('Fetching skills...');
     fetch('/api/skills')
       .then(res => res.json())
       .then(data => {
-        console.log('Skills loaded:', data);
         setSkills(data);
         setLoading(false);
       })
@@ -49,13 +47,13 @@ const About = () => {
 
     if (!loading && skills.length > 0) {
       gsap.fromTo('.skills-card',
-        { x: 50, opacity: 0, filter: 'blur(15px)' },
+        { y: 50, opacity: 0, filter: 'blur(15px)' },
         {
           scrollTrigger: {
             trigger: container.current,
             start: 'top 75%'
           },
-          x: 0,
+          y: 0,
           opacity: 1,
           filter: 'blur(0px)',
           duration: 1.5,
@@ -74,10 +72,9 @@ const About = () => {
   return (
     <section id="about" ref={container} style={{ padding: '80px 0 60px', position: 'relative', zIndex: 10 }}>
       <div className="container">
-        <div className="grid-2" style={{ alignItems: 'flex-start' }}>
-          {/* Bio Section */}
-          <div className="about-content">
-            <h2 className="section-title heading-display" style={{ textAlign: 'left', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '60px', alignItems: 'center' }}>
+          <div className="about-content" style={{ width: '100%', maxWidth: '900px', textAlign: 'center' }}>
+            <h2 className="section-title heading-display" style={{ textAlign: 'center', marginBottom: '20px' }}>
               <div className="reveal-text">
                 <span className="text-gradient" 
                   style={{ display: 'inline-block', cursor: 'default', transition: 'var(--transition-smooth)' }}
@@ -87,7 +84,7 @@ const About = () => {
               </div>
             </h2>
 
-            <div style={{ height: '4px', width: '60px', background: 'var(--accent)', marginBottom: '30px', borderRadius: '100px' }}></div>
+            <div style={{ height: '4px', width: '60px', background: 'var(--accent)', margin: '0 auto 30px', borderRadius: '100px' }}></div>
 
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
@@ -101,10 +98,9 @@ const About = () => {
 
           </div>
 
-          {/* Skills Section */}
-          <div className="skills-card">
+          <div className="skills-card" style={{ width: '100%', maxWidth: '1100px' }}>
             <div className="glass-panel" style={{ padding: 'clamp(20px, 5vw, 35px)', background: 'var(--glass-bg)' }}>
-              <h3 className="heading-display" style={{ fontSize: '2.2rem', marginBottom: '25px', letterSpacing: '-1px' }}>
+              <h3 className="heading-display" style={{ fontSize: '2.2rem', marginBottom: '25px', letterSpacing: '-1px', textAlign: 'center' }}>
                 My Skills
               </h3>
 
@@ -114,7 +110,7 @@ const About = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
 
                   {skills.map(skillGroup => (
-                    <div key={skillGroup.category}>
+                    <div key={skillGroup.category} style={{ textAlign: 'center' }}>
                       <h4 style={{
                         color: 'var(--accent-light)',
                         marginBottom: '20px',
@@ -125,7 +121,7 @@ const About = () => {
                       }}>
                         {skillGroup.category}
                       </h4>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
                         {skillGroup.items.map(item => (
                           <span key={item} className="skill-badge" style={{
                             padding: '10px 20px',
@@ -139,7 +135,7 @@ const About = () => {
                             cursor: 'default'
                           }}
                             onMouseOver={(e) => {
-                              e.target.style.background = 'rgba(139, 92, 246, 0.1)';
+                              e.target.style.background = 'rgba(255, 255, 255, 0.1)';
                               e.target.style.borderColor = 'var(--accent-light)';
                               e.target.style.boxShadow = '0 0 15px var(--accent-glow)';
                             }}
