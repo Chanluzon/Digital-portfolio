@@ -92,6 +92,17 @@ const Contact = () => {
     transition: 'var(--transition-smooth)'
   };
 
+  const infoCardStyle = {
+    width: '100%',
+    maxWidth: '520px',
+    padding: '18px 20px',
+    borderRadius: '16px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '18px',
+    boxSizing: 'border-box'
+  };
+
   return (
     <section id="contact" ref={container} className="container" style={{ padding: '80px 0 60px', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
       <div className="grid-2" style={{ alignItems: 'center', gap: '60px', width: '100%' }}>
@@ -113,22 +124,22 @@ const Contact = () => {
           </p>
 
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-            <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', width: '100%' }}>
+            <div className="glass-panel" style={infoCardStyle}>
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem', flexShrink: 0 }}>
                 <Mail size={20} strokeWidth={2} />
               </div>
-              <div>
+              <div style={{ minWidth: 0, flex: 1 }}>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Email</div>
-                <div style={{ fontWeight: 600 }}>christamron.luzon@gmail.com</div>
+                <div style={{ fontWeight: 600, wordBreak: 'break-word' }}>christamron.luzon@gmail.com</div>
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '20px 30px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem' }}>
+            <div className="glass-panel" style={infoCardStyle}>
+              <div style={{ width: '45px', height: '45px', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-light)', fontSize: '1.2rem', flexShrink: 0 }}>
                 <MapPin size={20} strokeWidth={2} />
               </div>
-              <div>
+              <div style={{ minWidth: 0, flex: 1 }}>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Location</div>
                 <div style={{ fontWeight: 600 }}>Cebu City, Philippines</div>
               </div>

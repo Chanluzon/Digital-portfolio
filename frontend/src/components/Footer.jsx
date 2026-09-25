@@ -39,7 +39,16 @@ const Footer = () => {
         </p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', marginBottom: '60px', flexWrap: 'wrap' }}>
+      <div className="footer-socials" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, minmax(90px, 1fr))',
+        gap: '20px 24px',
+        maxWidth: '760px',
+        width: '100%',
+        margin: '0 auto 60px',
+        justifyItems: 'center',
+        alignItems: 'center'
+      }}>
         {socialLinks.map(({ name, href, svg }) => (
           <a
             key={name}
@@ -52,8 +61,13 @@ const Footer = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '12px',
-              transition: 'var(--transition-smooth)'
+              transition: 'var(--transition-smooth)',
+              width: '100%',
+              minWidth: '90px',
+              maxWidth: '140px',
+              textAlign: 'center'
             }}
             onMouseOver={(e) => {
               const target = e.currentTarget;

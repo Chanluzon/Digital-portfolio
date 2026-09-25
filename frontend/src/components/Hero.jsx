@@ -159,16 +159,19 @@ const Hero = () => {
             marginBottom: '20px',
             fontWeight: 400
           }}>
-            I'm a frontend developer crafting immersive digital experiences through refined code and elegant design. I specialize in building high-performance, visually stunning web applications.
+            I'm a full-stack developer building modern web applications through clean code, thoughtful design, and reliable functionality. I work across both frontend and backend, creating responsive interfaces, APIs, databases, and complete web experiences.
           </p>
 
 
           <div className="hero-btns" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <a href="#projects" style={{ textDecoration: 'none' }}>
-              <button className="btn-primary">
+              <button className="btn-secondary">
                 Explore Work
                 <span style={{ fontSize: '1.2rem', transition: 'transform 0.3s ease' }}>→</span>
               </button>
+            </a>
+            <a href="/cv.pdf" download="Christ Amron Luzon - RESUME SOFTDEV.pdf" style={{ textDecoration: 'none' }}>
+              <button className="btn-secondary">Download CV</button>
             </a>
             <a href="#contact" style={{ textDecoration: 'none' }}>
               <button className="btn-secondary">Let's Connect</button>

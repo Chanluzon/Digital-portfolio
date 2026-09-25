@@ -89,10 +89,10 @@ const About = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
-                I'm a passionate software engineer based in <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Cebu City</span>, focused on crafting deeply interactive, premium web experiences. I specialize in building visually refined interfaces that combine pixel-perfect design with smooth, engaging animations.
+                I'm a passionate software engineer based in <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Cebu City</span>, focused on building practical and engaging web applications from frontend to backend. I work with technologies such as <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>ReactJS, Django, PostgreSQL, Firebase, and REST APIs</span> to develop applications that are responsive, functional, and easy to use.
               </p>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', lineHeight: 1.8 }}>
-                My core drive lies in creating frontend experiences that are both aesthetically compelling and highly functional. Whether I me building AI-powered applications or designing seamless UI interactions, I aim to build technology that feels as good as it looks.
+                My focus is on building complete web solutions—from designing intuitive interfaces and implementing features to developing APIs, managing databases, testing functionality, and troubleshooting issues. Whether I'm working on a full-stack application or integrating new features, I aim to create software that is both reliable and enjoyable to use.
               </p>
             </div>
 

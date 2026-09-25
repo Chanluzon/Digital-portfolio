@@ -13,13 +13,12 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// Mock Data
 const projects = [
     {
         id: 1,
-        title: 'SpeakForge - Android Mobile Application',
-        description: 'An AI-powered multilingual chat app with real-time text and voice translation, helping Bisaya-speaking communities communicate with non-native speakers.',
-        techStack: ['Java', 'Android Studio', 'Firebase', 'Django', 'Python', 'Claude AI', 'DeepSeek', 'Gemini AI'],
+        title: 'SpeakForge - Mobile Communication App',
+        description: 'A communication app built to help Bisaya-speaking users translate live text and voice conversations more easily across languages.',
+        techStack: ['Java', 'Android Studio', 'Firebase', 'Django', 'Python'],
         image: '/speakforge.png',
         imageFit: 'contain',
         liveLink: 'https://speakforge-capstone2.netlify.app/',

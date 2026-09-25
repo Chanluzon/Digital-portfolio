@@ -298,6 +298,27 @@ html, body {
     grid-template-columns: 1fr;
   }
 
+  .footer-socials {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px 12px !important;
+    max-width: 380px !important;
+  }
+
+  .footer-socials .glass-panel {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+  }
+
+  .footer-socials a {
+    min-width: 0 !important;
+  }
+
+  .footer-socials span {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.8px !important;
+  }
+
   .section-title {
     font-size: clamp(2rem, 8vw, 3rem) !important;
     margin-bottom: 30px !important;
