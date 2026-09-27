@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import profileImg from '../assets/un3.png';
+import resumePdf from '../assets/Christ Amron Luzon - RESUME SOFTDEV.pdf';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -170,7 +171,7 @@ const Hero = () => {
                 <span style={{ fontSize: '1.2rem', transition: 'transform 0.3s ease' }}>→</span>
               </button>
             </a>
-            <a href="/cv.pdf" download="Christ Amron Luzon - RESUME SOFTDEV.pdf" style={{ textDecoration: 'none' }}>
+            <a href={resumePdf} download="Christ Amron Luzon - RESUME SOFTDEV.pdf" style={{ textDecoration: 'none' }}>
               <button className="btn-secondary">Download CV</button>
             </a>
             <a href="#contact" style={{ textDecoration: 'none' }}>
