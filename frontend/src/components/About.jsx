@@ -63,7 +63,20 @@ const About = () => {
 
       gsap.fromTo('.skill-badge',
         { scale: 0.3, opacity: 0, filter: 'blur(10px)' },
-        { scale: 1, opacity: 1, filter: 'blur(0px)', stagger: 0.05, duration: 0.6, ease: 'back.out(1.7)', delay: 0.5 }
+        {
+          scrollTrigger: {
+            trigger: '.skills-card',
+            start: 'top 75%',
+            toggleActions: 'play none none none'
+          },
+          scale: 1,
+          opacity: 1,
+          filter: 'blur(0px)',
+          stagger: 0.05,
+          duration: 0.6,
+          ease: 'back.out(1.7)',
+          delay: 0.5
+        }
       );
     }
   }, { scope: container, dependencies: [loading, skills] });

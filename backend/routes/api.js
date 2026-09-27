@@ -57,7 +57,7 @@ const projects = [
 const skills = [
     { 
         category: 'Frontend & Web Development', 
-        items: ['ReactJS', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive Web Design'] 
+        items: ['ReactJS', 'JavaScript', 'GSAP', 'HTML5', 'CSS3', 'Tailwind CSS', 'Responsive Web Design'] 
     },
     { 
         category: 'Backend & Frameworks', 
